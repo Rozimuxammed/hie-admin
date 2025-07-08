@@ -12,7 +12,7 @@ export default function Navbar() {
   const dispatch = useDispatch();
   return (
     <header>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b dark:border-b-gray-700 dark:border-b dark:border-b-gray-400">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b dark:border-b dark:border-b-gray-400">
         <div className="container mx-auto flex items-center justify-between py-4 px-4 sm:px-6">
           {/* Logo */}
           <h1 className="text-2xl font-bold">
