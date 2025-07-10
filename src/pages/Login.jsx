@@ -5,13 +5,37 @@ import { Label } from "../components/ui/label";
 import { Eye, EyeOff } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setUser } from "../lib/redux/slices/auth/auth-slice";
+import { login } from "../requests";
+import { validation } from "../validations";
+import { toast } from "sonner";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
   const hundleSubmit = (e) => {
     e.preventDefault();
-    dispatch(setUser(true));
+    const formData = new FormData(e.target);
+    const res = {};
+
+    for (let [key, value] of formData.entries()) {
+      res[key] = value;
+    }
+
+    const result = validation(res);
+    if (result) {
+      const { target, message } = result;
+      e.target[target].focus();
+      toast.error(message);
+    } else {
+      login(res).then(
+        (res) => {
+          console.log(res);
+        },
+        ({ message }) => {
+          toast.error(message);
+        }
+      );
+    }
   };
 
   return (
@@ -24,11 +48,7 @@ export default function Login() {
           {/* Email */}
           <Label className="flex flex-col items-start gap-2 w-full text-black dark:text-white">
             <span>Email</span>
-            <Input
-              type="email"
-              name="email"
-              placeholder="Email kiriting..."
-            />
+            <Input type="email" name="email" placeholder="Email kiriting..." />
           </Label>
 
           {/* Password */}
