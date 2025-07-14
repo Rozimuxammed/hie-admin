@@ -8,9 +8,12 @@ import { setUser } from "../lib/redux/slices/auth/auth-slice";
 import { login } from "../requests";
 import { validation } from "../validations";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom"; // 👈 qo‘shildi
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate(); 
 
   const hundleSubmit = (e) => {
     e.preventDefault();
@@ -29,10 +32,12 @@ export default function Login() {
     } else {
       login(res).then(
         (res) => {
-          console.log(res);
+          dispatch(setUser(res)); // Reduxga user
+          toast.success("Muvaffaqiyatli kirdingiz");
+          navigate("/");
         },
         ({ message }) => {
-          toast.error(message);
+          toast.error(message || "Login xatosi");
         }
       );
     }
@@ -53,7 +58,7 @@ export default function Login() {
 
           {/* Password */}
           <Label className="flex flex-col items-start gap-2 w-full text-black dark:text-white relative">
-            <span>Password</span>
+            <span>Parol</span>
             <div className="relative w-full">
               <Input
                 name="password"

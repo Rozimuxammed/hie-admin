@@ -6,10 +6,17 @@ export const login = async (obj) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(obj),
   });
-  if (req.status === 200) {
-    const res = await req.json();
-    return res;
-  } else {
+
+  if (!req.ok) {
     throw new Error("Login failed");
   }
+
+  const res = await req.json();
+
+  const now = Date.now();
+  localStorage.setItem("token", res.token);
+  localStorage.setItem("token_created_at", now.toString());
+  localStorage.setItem("user", JSON.stringify(res.data));
+
+  return res.data;
 };

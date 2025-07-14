@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Moon, Sun, Menu, X, LogOut } from "lucide-react";
 import { useDispatch } from "react-redux";
-import { setUser } from "../lib/redux/slices/auth/auth-slice";
+import { logout, setUser } from "../lib/redux/slices/auth/auth-slice";
 import { useDarkMode } from "../hooks/useDarkMode";
 import { useState } from "react";
 import {
@@ -60,10 +60,9 @@ export default function Navbar() {
 
             {/* Logout */}
             <Button
-              onClick={() => {
-                localStorage.removeItem("token");
-                dispatch(setUser(false));
-              }}
+             onClick={() => {
+              dispatch(logout());
+            }}
               className="cursor-pointer"
               variant="outline"
             >
@@ -126,8 +125,7 @@ export default function Navbar() {
             {/* Logout */}
             <Button
               onClick={() => {
-                localStorage.removeItem("token");
-                dispatch(setUser(false));
+                dispatch(logout());
               }}
               variant="outline"
               className="w-full"

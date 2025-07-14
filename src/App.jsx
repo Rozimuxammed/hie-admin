@@ -1,3 +1,4 @@
+// App.jsx
 import {
   createBrowserRouter,
   Navigate,
@@ -6,11 +7,12 @@ import {
 import ProtectedRoute from "./components/ProtectedRoute";
 import MainLayout from "./layouts/MainLayout";
 import Login from "./pages/Login";
-import { useSelector } from "react-redux";
 import Dashboard from "./pages/Dashboard";
+import { useSelector } from "react-redux";
 
 export default function App() {
   const { user } = useSelector((state) => state.auth);
+
   const routes = createBrowserRouter([
     {
       path: "/",
@@ -28,8 +30,9 @@ export default function App() {
     },
     {
       path: "/login",
-      element: user ? <Navigate to={"/"} /> : <Login />,
+      element: user ? <Navigate to="/" /> : <Login />,
     },
   ]);
+
   return <RouterProvider router={routes} />;
 }
