@@ -28,12 +28,15 @@ export default function Navbar() {
           </h1>
 
           {/* Desktop Menu */}
-          <ul className="hidden md:flex gap-6 items-center text-black dark:text-white">
+          <ul className="hidden md:flex capitalize font-semibold gap-6 items-center text-black dark:text-white">
             <li>
               <NavLink to="/">Dashboard</NavLink>
             </li>
             <li>
               <NavLink to="/users">Users</NavLink>
+            </li>
+            <li>
+              <NavLink to="/categories">Categories</NavLink>
             </li>
           </ul>
 
@@ -41,7 +44,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-3.5">
             {/* Select */}
             <Select>
-              <SelectTrigger className="w-[130px]">
+              <SelectTrigger className="w-[80px]">
                 <SelectValue placeholder="ENG" />
               </SelectTrigger>
               <SelectContent>
@@ -63,13 +66,14 @@ export default function Navbar() {
 
             {/* Logout */}
             <Button
+              size={"icon"}
               onClick={() => {
                 dispatch(logout());
               }}
               className="cursor-pointer"
               variant="outline"
             >
-              LogOut <LogOut className="ml-2" size={16} />
+              <LogOut className="ml-2" size={16} />
             </Button>
           </div>
 
@@ -127,14 +131,13 @@ export default function Navbar() {
 
             {/* Logout */}
             <Button
+              size={"icon"}
               onClick={() => {
                 dispatch(logout());
               }}
               variant="outline"
               className="w-full"
-            >
-              LogOut
-            </Button>
+            ></Button>
           </div>
         )}
       </nav>

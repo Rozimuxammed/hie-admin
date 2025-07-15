@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import { useSelector } from "react-redux";
 import Users from "./pages/Users";
+import Categories from "./pages/Categories";
 
 export default function App() {
   const { user } = useSelector((state) => state.auth);
@@ -30,6 +31,10 @@ export default function App() {
         {
           path: "/users",
           element: <Users />,
+        },
+        {
+          path: "/categories",
+          element: <Categories />,
         },
       ],
     },
