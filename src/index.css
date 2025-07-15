@@ -118,6 +118,6 @@
     @apply bg-background text-foreground;
   }
   .active {
-    @apply bg-accent px-5 py-2 rounded-md text-accent-foreground;
+    @apply py-2 border-b-gray-900 border-b-2;
   }
 }

@@ -32,6 +32,9 @@ export default function Navbar() {
             <li>
               <NavLink to="/">Dashboard</NavLink>
             </li>
+            <li>
+              <NavLink to="/users">Users</NavLink>
+            </li>
           </ul>
 
           {/* Actions: Theme, Select, Logout */}
@@ -39,7 +42,7 @@ export default function Navbar() {
             {/* Select */}
             <Select>
               <SelectTrigger className="w-[130px]">
-                <SelectValue placeholder="Language" />
+                <SelectValue placeholder="ENG" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="eng">ENG</SelectItem>
@@ -60,9 +63,9 @@ export default function Navbar() {
 
             {/* Logout */}
             <Button
-             onClick={() => {
-              dispatch(logout());
-            }}
+              onClick={() => {
+                dispatch(logout());
+              }}
               className="cursor-pointer"
               variant="outline"
             >
@@ -113,12 +116,12 @@ export default function Navbar() {
             {/* Theme Select */}
             <Select>
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Language" />
+                <SelectValue placeholder="ENG" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="light">Light</SelectItem>
-                <SelectItem value="dark">Dark</SelectItem>
-                <SelectItem value="system">System</SelectItem>
+                <SelectItem value="eng">ENG</SelectItem>
+                <SelectItem value="zh">ZH</SelectItem>
+                <SelectItem value="ru">RU</SelectItem>
               </SelectContent>
             </Select>
 

@@ -9,6 +9,7 @@ import MainLayout from "./layouts/MainLayout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import { useSelector } from "react-redux";
+import Users from "./pages/Users";
 
 export default function App() {
   const { user } = useSelector((state) => state.auth);
@@ -25,6 +26,10 @@ export default function App() {
         {
           index: true,
           element: <Dashboard />,
+        },
+        {
+          path: "/users",
+          element: <Users />,
         },
       ],
     },
