@@ -2,18 +2,16 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { Eye, EyeOff } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { setUser } from "../lib/redux/slices/auth/auth-slice";
-import { login } from "../requests";
+import { Eye, EyeOff, RefreshCcw } from "lucide-react";
 import { validation } from "../validations";
 import { toast } from "sonner";
-import { useNavigate } from "react-router-dom"; // 👈 qo‘shildi
-
+import { login } from "../requests";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoader, setUser } from "../lib/redux/slices/auth/auth-slice";
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const { loading } = useSelector((state) => state.auth);
 
   const hundleSubmit = (e) => {
     e.preventDefault();
@@ -30,16 +28,19 @@ export default function Login() {
       e.target[target].focus();
       toast.error(message);
     } else {
-      login(res).then(
-        (res) => {
-          dispatch(setUser(res)); // Reduxga user
-          toast.success("Muvaffaqiyatli kirdingiz");
-          navigate("/");
-        },
-        ({ message }) => {
-          toast.error(message || "Login xatosi");
-        }
-      );
+      dispatch(setLoader());
+      login(res)
+        .then(
+          (user) => {
+            dispatch(setUser(user));
+          },
+          ({ message }) => {
+            toast.error(message);
+          }
+        )
+        .finally(() => {
+          dispatch(setLoader());
+        });
     }
   };
 
@@ -82,7 +83,7 @@ export default function Login() {
             className="w-full cursor-pointer"
             variant="outline"
           >
-            Kirish
+            {loading ? <RefreshCcw className="animate-spin" /> : "Kirish"}
           </Button>
         </form>
       </div>

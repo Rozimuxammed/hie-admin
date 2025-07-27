@@ -16,7 +16,25 @@ export const login = async (obj) => {
   const now = Date.now();
   localStorage.setItem("token", res.token);
   localStorage.setItem("token_created_at", now.toString());
-  localStorage.setItem("user", JSON.stringify(res.data));
+  localStorage.setItem("user", JSON.stringify(res.result));
+
+  return res.result;
+};
+
+export const categories = async (obj) => {
+  const req = await fetch(`${bestUrl}/category`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(obj),
+  });
+
+  if (!req.ok) {
+    throw new Error("Login failed");
+  }
+  const res = await req.json();
 
   return res.data;
 };

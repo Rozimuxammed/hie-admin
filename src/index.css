@@ -120,4 +120,7 @@
   .active {
     @apply py-2 border-b-gray-900 border-b-2;
   }
+  .recharts-bar-rectangle:hover {
+    fill: #4f46e5 !important; /* o‘sha original bar rangi */
+  }
 }

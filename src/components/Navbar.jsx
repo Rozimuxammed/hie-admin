@@ -104,7 +104,7 @@ export default function Navbar() {
             <ul className="flex flex-col gap-4 text-black dark:text-white">
               <li>
                 <NavLink
-                  to="/dashboard"
+                  to="/"
                   onClick={() => setIsMenuOpen(false)}
                   className={({ isActive }) =>
                     isActive
@@ -113,6 +113,32 @@ export default function Navbar() {
                   }
                 >
                   Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-semibold underline underline-offset-4"
+                      : "hover:underline"
+                  }
+                  to="/users"
+                >
+                  Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  onClick={() => setIsMenuOpen(false)}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "font-semibold underline underline-offset-4"
+                      : "hover:underline"
+                  }
+                  to="/categories"
+                >
+                  Categories
                 </NavLink>
               </li>
             </ul>
@@ -137,7 +163,9 @@ export default function Navbar() {
               }}
               variant="outline"
               className="w-full"
-            ></Button>
+            >
+              <LogOut className="ml-2" size={16} />
+            </Button>
           </div>
         )}
       </nav>
