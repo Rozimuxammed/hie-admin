@@ -1,7 +1,7 @@
 const bestUrl = import.meta.env.VITE_API_KEY;
 
 export const login = async (obj) => {
-  const req = await fetch(`${bestUrl}/authorization/login`, {
+  const req = await fetch(`https://hie.pixl.uz/authorization/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(obj),
@@ -22,7 +22,7 @@ export const login = async (obj) => {
 };
 
 export const PostCategory = async (obj) => {
-  const req = await fetch(`${bestUrl}/category`, {
+  const req = await fetch(`https://hie.pixl.uz/category`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
