@@ -21,7 +21,7 @@ export const login = async (obj) => {
   return res.result;
 };
 
-export const categories = async (obj) => {
+export const PostCategory = async (obj) => {
   const req = await fetch(`${bestUrl}/category`, {
     method: "POST",
     headers: {
@@ -35,6 +35,6 @@ export const categories = async (obj) => {
     throw new Error("Login failed");
   }
   const res = await req.json();
-
-  return res.data;
+  localStorage.setItem("categori", JSON.stringify(res));
+  return res;
 };

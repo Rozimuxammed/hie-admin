@@ -2,7 +2,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  categories: null,
+  categories: JSON.parse(localStorage.getItem("categori")) || null,
+  loading: false,
 };
 
 const categoriesSlice = createSlice({
@@ -12,8 +13,11 @@ const categoriesSlice = createSlice({
     setCategory: (state, { payload }) => {
       state.categories = payload;
     },
+    setLoading: (state) => {
+      state.loading = !state.loading;
+    },
   },
 });
 
-export const { setCategory } = categoriesSlice.actions;
+export const { setCategory, setLoading } = categoriesSlice.actions;
 export default categoriesSlice.reducer;
