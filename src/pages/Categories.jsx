@@ -116,27 +116,42 @@ export default function Categories() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            <TableRow>
-              <TableCell className="font-medium">{categories.id}</TableCell>
-              <TableCell>{categories.translation.map((t) => t.name)}</TableCell>
-              <TableCell>
-                {format(new Date(categories.createdAt), "dd.MM.yyyy HH:mm")}
-              </TableCell>
-              <TableCell className="flex items-center gap-3 justify-end">
-                <Button
-                  variant="outline"
-                  className={"w-7 h-7 rounded-sm cursor-pointer"}
+            {categories &&
+            categories.translation &&
+            categories.translation.length > 0 ? (
+              <TableRow>
+                <TableCell className="font-medium">{categories.id}</TableCell>
+                <TableCell>
+                  {categories.translation.map((t) => t.name).join(", ")}
+                </TableCell>
+                <TableCell>
+                  {format(new Date(categories.createdAt), "dd.MM.yyyy HH:mm")}
+                </TableCell>
+                <TableCell className="flex items-center gap-3 justify-end">
+                  <Button
+                    variant="outline"
+                    className={"w-7 h-7 rounded-sm cursor-pointer"}
+                  >
+                    <Edit />
+                  </Button>
+                  <Button
+                    variant="destructive"
+                    className={"w-7 h-7 rounded-sm cursor-pointer"}
+                  >
+                    <Trash2 />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={4}
+                  className="text-center py-4 text-muted-foreground"
                 >
-                  <Edit />
-                </Button>
-                <Button
-                  variant="destructive"
-                  className={"w-7 h-7 rounded-sm cursor-pointer"}
-                >
-                  <Trash2 />
-                </Button>
-              </TableCell>
-            </TableRow>
+                  Ma'lumot yo'q
+                </TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </section>
