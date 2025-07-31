@@ -17,7 +17,7 @@ const categoriesSlice = createSlice({
       state.loading = !state.loading;
     },
     addCategory: (state, { payload }) => {
-      state.categories.push(payload); // eng oxirga qo‘shish uchun .push
+      state.categories.push(payload);
     },
   },
 });
