@@ -26,6 +26,13 @@ import {
   setCategory,
   setLoading,
 } from "../lib/redux/slices/category/category-slice";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { Edit, Eye, RefreshCcw, Trash } from "lucide-react";
@@ -36,7 +43,7 @@ export default function Categories() {
   const [editCategory, setEditcategory] = useState(false);
   const [getId, setgetId] = useState(null);
   const [deletingId, setDeletingId] = useState(null);
-
+  const [pendingDeleteId, setPendingDeleteId] = useState(null);
   const [CategoryName, setCategoryName] = useState(null);
 
   const dispatch = useDispatch();
@@ -226,7 +233,7 @@ export default function Categories() {
                             <Edit />
                           </Button>
                           <Button
-                            onClick={() => deleted(id)}
+                            onClick={() => setPendingDeleteId(id)}
                             variant="destructive"
                             size="icon"
                             className="cursor-pointer"
@@ -384,6 +391,46 @@ export default function Categories() {
           </div>
         </section>
       )}
+
+      <Dialog
+        open={!!pendingDeleteId}
+        onOpenChange={(open) => {
+          if (!open) setPendingDeleteId(null);
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Haqiqatan o‘chirilsinmi?</DialogTitle>
+          </DialogHeader>
+          <div className="py-2">
+            <p>
+              Bu kategoriyani o‘chirishni xohlaysizmi? Bu amalni bekor qilib
+              bo‘lmaydi.
+            </p>
+          </div>
+          <DialogFooter className="flex gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => setPendingDeleteId(null)}
+              disabled={!!deletingId}
+            >
+              Bekor qilish
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={() => {
+                if (pendingDeleteId) {
+                  deleted(pendingDeleteId);
+                  setPendingDeleteId(null);
+                }
+              }}
+              disabled={!!deletingId}
+            >
+              Ha, o‘chirilsin
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
