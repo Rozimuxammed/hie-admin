@@ -306,7 +306,7 @@ export default function Categories() {
                         <Edit />
                       </Button>
                       <Button
-                        onClick={() => deleted(id)}
+                        onClick={() => setPendingDeleteId(id)}
                         variant="destructive"
                         size="icon"
                         disabled={deletingId === id}
@@ -349,7 +349,6 @@ export default function Categories() {
                 defaultValue={`${
                   CategoryName && CategoryName.map((t) => t.name).join(", ")
                 }`}
-                required
                 className="shadow-none border-r-0 border-gray-950/50 rounded-tr-none rounded-br-none"
                 placeholder="Update category..."
               />
